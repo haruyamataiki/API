@@ -2,19 +2,19 @@
 <p>Find me in app/views/shops/index.html.erb</p>
 <style>
 	#target{
-		width:200px;
+		width:550px;
 		height:200px;
 	}
 </style>
 <div id ="target"></div>
-	<script src="http://maps.google.com/maps/api/js?key={AIzaSyBzNYUBDAl6gihzh_mlF_0c3-7b_J-F1V8}&language=ja"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyBzNYUBDAl6gihzh_mlF_0c3-7b_J-F1V8&callback=initMap" async defer></script>
 <script>
 	function initMap(){
 		'use strict';
 
 		var target = document.getElementById('target');
 		var map;
-		var tokyo = {lat: 35.6881167, lng: 139.767052};
+		var tokyo = {lat: 35.681167, lng: 139.767052};
 
 		map = new google.maps.Map(target,{
 			center: tokyo,
@@ -24,6 +24,33 @@
 </script>
 
 
-<%= link_to "ログアウト", destroy_user_session_path, method: "delete" %>
-
 AIzaSyBzNYUBDAl6gihzh_mlF_0c3-7b_J-F1V8
+
+<div class="containar">
+  <div class="row">
+    <div class="col-lg-3">
+      <%= render 'shops/list', user:@user %>
+      <%= render 'shops/post', shop:@shop %>
+    </div>
+    <div class="col-lg-9">
+      <h2>s</h2>
+      <table class="table table-hover">
+        <tbody>
+  		  <tr>
+  		  	<th></th>
+    			<th>店名</th>
+    			<th>概要</th>
+    			<th colspan="3"></th>
+    		</tr>
+      <% @shops.each do |shop| %>
+        <tr>
+          <td><%= attachment_image_tag shop.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no2_image.jpg" %></td>
+          <td><%=link_to shop.shop_name, shop_path(shop.id) %></td>
+          <td><%=shop.caption %></td>
+        </tr>
+      <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

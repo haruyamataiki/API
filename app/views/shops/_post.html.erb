@@ -1,0 +1,10 @@
+   <h2>New shop</h2>
+   <div class="row">
+    <%= form_for(shop) do |f| %>
+       <h4>店名</h4>
+    <%= f.text_field :shop_name ,class:"col-xs-12"%>
+        <h4>概要</h4>
+    <%= f.text_area :caption ,class:"col-xs-12"%>
+    <%= f.submit '投稿する',class:"col-xs-12 btn btn-primary"%>
+    <% end %>
+    </div>
