@@ -1,8 +1,6 @@
 <div class="containar">
   <div class="row">
     <div class="col-lg-3">
-      <%= render 'shops/list', user: @shop.user %>
-      <%= render 'shops/post', shop: @shop %>
     </div>
     <div class="col-lg-9">
         <h2>shop detail</h2>
@@ -10,7 +8,6 @@
           <tbody>
             <tr>
               <td><%= attachment_image_tag @shop.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no2_image.jpg" %>
-                <%=link_to @shop.user.name,user_path(@user.id)%>
               </td>
               <td><%=@shop.shop_name%></td>
               <td><%=@shop.caption %></td>

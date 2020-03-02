@@ -1,14 +1,26 @@
 class ShopsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, {only: [:edit]}
   def index
-    @shops=Shop.all
+    @shops = Shop.all
   	@shop = Shop.new
     @user = current_user
   end
 
   def show
 	@shop = Shop.find(params[:id])
-    @Shop = Shop.new
-    @user = @Shop.user
+    @user = @shop.user
+  end
+
+  def create
+	shop = Shop.new(shop_params)
+    shop.user_id = current_user.id
+	if  shop.save
+        redirect_to shop_path(shop.id),notice:"successfully"
+    else
+     flash[:notice] = "error"
+	   redirect_to shops_path
+    end
   end
 
  private
